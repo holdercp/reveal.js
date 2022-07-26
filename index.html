@@ -1,40 +1,119 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Vue Ramp-up</h1>
+			</section>
+
+			<section>
+				<section>
+					<h2>What is Vue.js?</h2>
+				</section>
+				<section>
+					<p>Vue (pronounced like "view") is a JS framework for building user interfaces.</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>How does it compare to React?</h2>
+				</section>
+				<section>
+					<h2>Similarities</h2>
+					<ul>
+						<li>utilize a virtual DOM</li>
+						<li>provide reactive and composable components</li>
+						<li>use one-way data flow</li>
+						<li>rely on other libraries to do things like routing</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Differences</h2>
+					<ul>
+						<li>templates instead of JSX</li>
+						<li>styles defined with and scoped to components</li>
+						<li>generally more "magical"</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h2>React Implementation</h2>
+				<iframe class="r-stretch"
+					src="https://codesandbox.io/embed/shopping-list-react-h3vbez?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FShoppingList%2FShoppingList.jsx&theme=dark"
+					style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="shopping-list-react"
+					allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+					sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+			</section>
+
+			<section>
+				<h2>Vue Single File Components</h2>
+				<pre>
+					<code data-trim data-line-numbers="3-5|7-15|17-22|9-13|4,11">
+						// HelloWorld.vue
+
+						<template>
+							<p>{{ greeting }}, World!</p>
+						</template>
+
+						<script>
+							export default {
+								data: function () {
+									return {
+										greeting: 'Hello'
+									}
+								}
+							}
+						</script>
+
+						<style scoped>
+						p {
+							font-size: 2em;
+							text-align: center;
+						}
+						</style>
+					</code>
+				</pre>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+			width: 1200,
+			height: 800
+		});
+	</script>
+</body>
+
 </html>
