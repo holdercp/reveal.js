@@ -1,35 +1,36 @@
 # Component Code - Completed
 
+## ShoppingList
+
 ```js
 <template>
-  <div>
-    <form v-on:submit.prevent="addItem">
+  <component :is="element" :class="{ themed: theme }">
+    <form>
       <label for="itemName">Item Name</label>
       <input id="itemName" type="text" v-model="itemName" />
-      <button type="button" v-on:click="addItem">Add to List</button>
+      <button type="button" @click="addItem">Add to List</button>
     </form>
 
-    <h2 v-bind:class="headingClasses">
-      Shopping List<template v-if="listName"> for {{ listName }}</template>
+    <h2>
+      {{ formattedTitle }}
     </h2>
 
     <template v-if="items.length > 0">
       <ul>
         <li v-for="item in items" :key="item">{{ item }}</li>
       </ul>
-      <button type="button" v-on:click="clearList">Clear list</button>
+      <button @click="clearList">Clear List</button>
     </template>
-    <p v-else>Your list is empty. Try adding one above.</p>
+    <p v-else>Your list is empty. Try adding an item above.</p>
 
     <div>
-      <slot v-bind:itemCount="itemCount" name="itemCount"></slot>
+      <slot :itemCount="items.length" name="itemCount"></slot>
     </div>
-  </div>
+  </component>
 </template>
 
 <script>
 export default {
-  name: "ShoppingList",
   data() {
     return {
       items: [],
@@ -37,16 +38,20 @@ export default {
     };
   },
   props: {
-    listName: String,
-    initialItems: {
-      type: Array,
-      default() {
-        return [];
-      },
+    listName: {
+      type: String,
+      default: "",
     },
-    themeHeading: {
+    theme: {
       type: Boolean,
       default: false,
+    },
+    element: {
+      type: String,
+      default: "div",
+      validator: function (value) {
+        return ["div", "section"].includes(value);
+      },
     },
   },
   methods: {
@@ -59,23 +64,39 @@ export default {
     },
   },
   computed: {
-    headingClasses() {
-      return {
-        themed: this.themeHeading,
-      };
-    },
-    itemCount() {
-      return this.items.length !== 1
-        ? `${this.items.length} items`
-        : `${this.items.length} item`;
+    formattedTitle() {
+      const baseTitle = "Shopping List";
+      return this.listName ? `${baseTitle} for ${this.listName}` : baseTitle;
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-h2.themed {
+<style scoped>
+.themed {
   color: tomato;
 }
 </style>
+```
+
+## App
+
+```js
+<template>
+  <ShoppingList>
+    <template v-slot:itemCount="slotProps">
+      <small>{{ slotProps.itemCount }} items</small>
+    </template>
+  </ShoppingList>
+</template>
+
+<script>
+import ShoppingList from "./components/ShoppingList";
+export default {
+  name: "App",
+  components: {
+    ShoppingList,
+  },
+};
+</script>
 ```
