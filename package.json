@@ -96,5 +96,11 @@
       "no-eq-null": 2,
       "no-unused-expressions": 0
     }
+  },
+  "dependencies": {
+    "@ramsey-design-system/button": "^3.1.1",
+    "@ramsey-design-system/icon": "^2.2.3",
+    "@ramsey-design-system/icons": "^2.8.0",
+    "@ramsey-design-system/link": "^1.9.1"
   }
 }
